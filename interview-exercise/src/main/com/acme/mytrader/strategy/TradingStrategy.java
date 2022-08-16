@@ -11,12 +11,20 @@ public class TradingStrategy implements PriceListener {
 		{
 			if(security==null)
 				throw new NullPointerException();
+			
+			if(price < 0)
+				throw new IllegalArgumentException();
+			
 			// TODO Auto-generated method stub
 			System.out.println("Inside Price Update Method");
-			System.out.println("Printing the Value of Security---->"+security);
+			System.out.println("Printing the Value of Security---->"+security.length());
 			System.out.println("Double Price value ---->"+price);	
 		}
 		catch(NullPointerException exp)
+		{
+			exp.printStackTrace();
+		}
+		catch(IllegalArgumentException exp)
 		{
 			exp.printStackTrace();
 		}
