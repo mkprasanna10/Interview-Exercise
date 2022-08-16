@@ -17,7 +17,7 @@ public class TradingStrategyTest
 	public ExpectedException thrown = ExpectedException.none();
 	
 	@Test	
-    public void testPricePositive()
+    public void testPriceUpdatePositive()
 	{					
 		String Message = "Test the value";	//Given
 		Double price = 100.0;	
@@ -26,13 +26,25 @@ public class TradingStrategyTest
 	}
 
 	@Test(expected = NullPointerException.class)		
-    public void testPriceNegative() throws Exception
+    public void testPriceUpdateNegative() throws Exception
 	{
 		String Message = null; //Given
 		Double price = 100.0; 
 		
 		thrown.expect(NullPointerException.class);
-		thrown.expectMessage("Null Pointer Exception Message");
+		thrown.expectMessage("Null Pointer Exception Message Expected");
+
+		strategy.PriceUpdate(Message, price); //When
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testDoublePriceUpdate()
+	{
+		String Message = "Test the value";	//Given
+		Double price = -100.0;	
+		
+		thrown.expect(IllegalArgumentException.class);
+		thrown.expectMessage("Negative Values are Not Accepted for Price Value");
 
 		strategy.PriceUpdate(Message, price); //When
 	}
